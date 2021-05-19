@@ -189,15 +189,8 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
   
 //for use in cloud
 app.listen(process.env.PORT, function () {
-  if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
-  }
   console.log('listening on 3000')
 })
-
-app.get('/',(req, res) => {
-  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-});
 
 
 /** for use in local machine 
@@ -206,10 +199,8 @@ app.listen(3000, function () {
 })
 */
 
-/** 
 //start page, loads log-in screen;
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html')
 })
 
-*/

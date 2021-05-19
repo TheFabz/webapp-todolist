@@ -195,7 +195,7 @@ app.listen(process.env.PORT, function () {
   console.log('listening on 3000')
 })
 
-app.get('*',(req, res) => {
+app.get('/',(req, res) => {
   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 });
 
@@ -206,8 +206,10 @@ app.listen(3000, function () {
 })
 */
 
+/** 
 //start page, loads log-in screen;
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html')
 })
 
+*/

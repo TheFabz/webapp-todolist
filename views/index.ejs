@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <style>
+        body {
+            position: relative;
+            min-height: 100vh;
+            background-color: rgb(245, 227, 206);
+        }
+
+        .items {
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            height: 100%;
+            width: 100%;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <title>MyTodoList - main</title>
+</head>
+
+<body>
+
+    <!--NAV-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/show">MyTodoList</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/show-ordered">Order</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/show-ordered-daily">Today</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/show-ordered-weekly">This week</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/show-ordered-monthly">This month</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+                <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal-add"
+                    data-whatever="@mdo">Add
+                    event!</button>
+            </span>
+        </div>
+    </nav>
+    <!--NAV-->
+
+    <br><br>
+
+    <!--Add entry form-->
+    <div class="modal fade" id="exampleModal-add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add new entry</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/add_list_item" method="POST">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Title:</label>
+                            <input type="text" class="form-control" name="title">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Description:</label>
+                            <input type="text" class="form-control" name="description">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Participants:</label>
+                            <input type="text" class="form-control" name="participants">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Date:</label>
+                            <input type="date" class="form-control" name="date">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Add entry form-->
+
+
+    <br><br>
+
+    <!--cards with events-->
+    <div class="items">
+        <ul class="items">
+            <!-- Loop through items -->
+            <% for(var i=0; i < items.length; i++) {%>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= items[i].title %>
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            <%= items[i].date %>
+                        </h6>
+                        <p class="card-text">
+                            <%= items[i].description %>
+                        </p>
+                        <div class="card-body text-success">
+                            <p class="card-text">
+                                <%= items[i].participants %>
+                            </p>
+                        </div>
+
+                        <button type="button" class="btn" data-toggle="modal"
+                            data-target="#exampleModal-<%=items[i]._id%>" data-whatever="@mdo">Edit</button>
+
+
+                        <div class="modal fade" id="exampleModal-<%=items[i]._id%>" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Edit Entry</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <form action="/edit/<%=items[i]._id%>" method="POST">
+                                            <div class="form-group">
+                                                <label for="recipient-name" class="col-form-label">Title:</label>
+                                                <input type="text" class="form-control" name="title"
+                                                    placeholder="<%= items[i].title %>" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="recipient-name" class="col-form-label">Description:</label>
+                                                <input type="text" class="form-control" name="description"
+                                                    placeholder="<%= items[i].description %>" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="recipient-name" class="col-form-label">Participants:</label>
+                                                <input type="text" class="form-control" name="participants"
+                                                    placeholder="<%= items[i].participants %>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="recipient-name" class="col-form-label">Date:</label>
+                                                <input type="date" class="form-control" name="date"
+                                                    placeholder="<%= items[i].date %>" required>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Edit</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="/delete/<%=items[i]._id%>" class="card-link">Delete</a>
+                    </div>
+                </div>
+                <% } %>
+        </ul>
+    </div>
+    <!--cards with events-->
+
+    <br>
+    <br>
+
+    <!-- Footer -->
+    <footer class="page-footer font-small black">
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2021 Copyright Fábio Rodrigues
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+    <!-- Local script -->
+    <script type="text/javascript" src="script.js"></script>
+
+</body>
+
+</html>

@@ -32,12 +32,15 @@
 
         .items {
             margin: auto;
+            justify-content: space-around;
             display: flex;
             flex-wrap: wrap;
             flex-direction: row;
             height: 100%;
             width: 100%;
         }
+
+        
 
         footer {
             position: absolute;
@@ -128,7 +131,7 @@
     <br><br>
 
     <!--cards with events-->
-    <div class="items">
+    <div class="items_container">
         <ul class="items">
             <!-- Loop through items -->
             <% for(var i=0; i < items.length; i++) {%>

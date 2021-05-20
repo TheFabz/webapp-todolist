@@ -187,17 +187,17 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
   })
 
   
-//for use in cloud
+/** for use in local machine 
 app.listen(process.env.PORT, function () {
   console.log('listening on 3000')
 })
+*/
 
 
-/** for use in local machine 
+//local use
 app.listen(3000, function () {
   console.log('listening on 3000')
 })
-*/
 
 //start page, loads log-in screen;
 app.get('/', (req, res) => {

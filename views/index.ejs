@@ -29,7 +29,6 @@
             min-height: 100vh;
             background-color: rgb(245, 227, 206);
         }
-
         .items {
             
             margin: auto;
@@ -40,9 +39,6 @@
             height: 100%;
             width: 100%;
         }
-
-        
-
         footer {
             position: absolute;
             bottom: 0;
@@ -174,22 +170,22 @@
                                             <div class="form-group">
                                                 <label for="recipient-name" class="col-form-label">Title:</label>
                                                 <input type="text" class="form-control" name="title"
-                                                    placeholder="<%= items[i].title %>" required>
+                                                    value="<%= items[i].title %>" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="recipient-name" class="col-form-label">Description:</label>
                                                 <input type="text" class="form-control" name="description"
-                                                    placeholder="<%= items[i].description %>" required>
+                                                    value="<%= items[i].description %>" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="recipient-name" class="col-form-label">Participants:</label>
                                                 <input type="text" class="form-control" name="participants"
-                                                    placeholder="<%= items[i].participants %>">
+                                                    value="<%= items[i].participants %>">
                                             </div>
                                             <div class="form-group">
                                                 <label for="recipient-name" class="col-form-label">Date:</label>
                                                 <input type="date" class="form-control" name="date"
-                                                    placeholder="<%= items[i].date %>" required>
+                                                    value="<%= items[i].date %>" required>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
